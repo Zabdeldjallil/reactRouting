@@ -16,7 +16,7 @@ function App() {
        <Switch>
            <Route path="/" exact component={Home} />
 
-           {auth ? <Switch><Route path="/About/:name" component={About}/>
+           {auth ? <Switch><Route path="/About/:name/:surname" component={About}/>
                <Route render={()=><h1>404 not found</h1>} />
            </Switch>:<Redirect to="/" />
            }

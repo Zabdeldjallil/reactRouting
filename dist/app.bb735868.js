@@ -35879,13 +35879,18 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function About(_ref) {
-  var name = _ref.match.params.name,
-      surname = _ref.match.params.surname,
-      history = _ref.history;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, name != "john" ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Redirect, {
-    to: "/"
-  }) : null, /*#__PURE__*/_react.default.createElement("div", null, "i am the about ", name, " et ", surname, " component", /*#__PURE__*/_react.default.createElement("button", {
+function About() {
+  //plus la peine d'utiliser history en tant que props
+  var history = (0, _reactRouterDom.useHistory)();
+
+  var _useParams = (0, _reactRouterDom.useParams)(),
+      name = _useParams.name,
+      surname = _useParams.surname;
+
+  var location = (0, _reactRouterDom.useLocation)();
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, console.log(location) //name !="john" ? <Redirect to="/" />:null}
+  //we won't have to use match:{params:{name}} to get the params passed to the link
+  , /*#__PURE__*/_react.default.createElement("div", null, "i am the about ", name, " et ", surname, " component", /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       history.push('/');
     }
@@ -35907,17 +35912,20 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = require("react-dom");
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Home(_ref) {
-  var history = _ref.history;
+function Home() {
+  //pas la peine de passer history comme props maintenant
+  var history = (0, _reactRouterDom.useHistory)();
   return /*#__PURE__*/_react.default.createElement("div", null, "i am the home component", /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       history.goForward();
     }
   }, "go forward"));
 }
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"app.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"app.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -35946,7 +35954,7 @@ function App() {
     exact: true,
     component: _home.default
   }), auth ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/About/:name",
+    path: "/About/:name/:surname",
     component: _about.default
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     render: function render() {
@@ -35986,7 +35994,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46641" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
